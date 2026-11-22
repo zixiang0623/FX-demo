@@ -22,8 +22,8 @@ button{font:inherit;cursor:pointer;border:1px solid var(--line);background:#fff;
 button:hover{background:var(--bg)}button:active{transform:scale(.97)}button:focus-visible,input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}button:disabled{opacity:.45;cursor:not-allowed}
 .q{width:100%;justify-content:space-between;margin-bottom:6px;padding:10px 12px;text-align:left}.q.on{border-color:var(--ac);box-shadow:0 0 0 1px var(--ac) inset}
 .q b{display:block;font-size:13px}.q span{font-size:12px;color:var(--mute)}.up{color:var(--up)}.dn{color:var(--dn)}
-.big{font-size:28px;font-weight:700;letter-spacing:-.03em}.big small{font-size:12px;color:var(--mute);font-weight:400;margin-left:6px}
-canvas{width:100%;height:260px;display:block;margin-top:8px}
+.big{font-size:28px;font-weight:700;letter-spacing:-.03em;line-height:1.15}.big small{font-size:12px;color:var(--mute);font-weight:400;margin-left:6px}
+canvas{width:100%;height:260px;display:block;margin-top:10px}
 .ord{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
 label{font-size:12px;color:var(--mute);display:block}input{width:100%;font:inherit;padding:8px;border:1px solid var(--line);border-radius:8px;margin-top:3px}
 .bs{display:grid;grid-template-columns:1fr 1fr;gap:8px}.bs button{padding:12px;font-weight:700;color:#fff;border:0}
@@ -99,8 +99,8 @@ function draw(){
   g.strokeStyle=cs.getPropertyValue("--line");g.lineWidth=1;for(let i=1;i<5;i++){g.beginPath();g.moveTo(0,H*i/5);g.lineTo(W,H*i/5);g.stroke()}
   g.beginPath();h.forEach((v,i)=>i?g.lineTo(X(i),Y(v)):g.moveTo(X(i),Y(v)));g.strokeStyle=col;g.lineWidth=2;g.lineJoin="round";g.stroke();
   g.lineTo(W,H);g.lineTo(0,H);g.closePath();const gr=g.createLinearGradient(0,0,0,H);gr.addColorStop(0,col.replace(")"," / .18)"));gr.addColorStop(1,col.replace(")"," / 0)"));g.fillStyle=gr;g.fill();
-  g.setLineDash([5,4]);g.font="11px system-ui";S.positions.filter(x=>x.pair===pair).forEach(x=>{if(x.open<lo||x.open>hi)return;g.strokeStyle=cs.getPropertyValue("--ac");g.beginPath();g.moveTo(0,Y(x.open));g.lineTo(W,Y(x.open));g.stroke();g.fillStyle=cs.getPropertyValue("--ac");g.fillText(`#${x.id} ${x.side==="buy"?"買":"売"} ${x.open}`,6,Y(x.open)-4)});
-  g.setLineDash([]);g.fillStyle=cs.getPropertyValue("--mute");g.fillText(hi.toFixed(pair.endsWith("JPY")?3:5),6,12);g.fillText(lo.toFixed(pair.endsWith("JPY")?3:5),6,H-5);
+  g.setLineDash([5,4]);g.font="11px system-ui";S.positions.filter(x=>x.pair===pair).forEach(x=>{if(x.open<lo||x.open>hi)return;g.strokeStyle=cs.getPropertyValue("--ac");g.beginPath();g.moveTo(0,Y(x.open));g.lineTo(W,Y(x.open));g.stroke();g.fillStyle=cs.getPropertyValue("--ac");g.fillText(`#${x.id} ${x.side==="buy"?"買":"売"} ${x.open}`,0,Y(x.open)-4)});
+  g.setLineDash([]);g.fillStyle=cs.getPropertyValue("--mute");g.fillText(hi.toFixed(pair.endsWith("JPY")?3:5),0,12);g.fillText(lo.toFixed(pair.endsWith("JPY")?3:5),0,H-5);
 }
 const order=side=>tool("place_order",{pair,side,units:+$("#u").value,sl_pips:+$("#sl").value||undefined,tp_pips:+$("#tp").value||undefined});
 $("#buy").onclick=()=>order("buy");$("#sell").onclick=()=>order("sell");$("#u").oninput=()=>S&&render();
